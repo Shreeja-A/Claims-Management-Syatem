@@ -1,0 +1,53 @@
+@model WebApplication2.Models.Claim
+
+
+@{
+    ViewBag.Title = "RejectClaim";
+}
+
+<h3 style="text-align: center;
+        padding-top: 100px;
+        padding-bottom: 100px
+">
+    The Claim Id:@Model.ClaimId has been Denied
+</h3>
+<body>
+    @using (Html.BeginForm("RejectClaim", "Admin"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="padding-top:50px ;padding-bottom:25px">
+            <h4>Please provide the reason for rejecting the Claim</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClaimId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ClaimId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ClaimId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="padding-bottom:120px">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" style="background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px" ; />
+            </div>
+        </div>
+       
+    }
+</body>
