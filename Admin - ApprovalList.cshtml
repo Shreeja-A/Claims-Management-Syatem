@@ -1,0 +1,126 @@
+@model IEnumerable<WebApplication2.Models.User>
+
+@{
+    ViewBag.Title = "List Of Registered Member";
+}
+
+<h2 style="padding-top:50px; padding-bottom:50px">List Of Registered Members</h2>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    tr {
+        border: 1px ridge lightgray;
+        border-left: none;
+        border-right: none;
+    }
+
+    th {
+        padding-top: 30px;
+        padding-right: 100px;
+        padding-bottom: 30px;
+    }
+
+        th:first-child {
+            padding-left: 30px;
+        }
+
+    tr:first-child {
+        border-top: none;
+    }
+
+    td:first-child {
+        padding-left: 30px;
+    }
+
+    tr:last-child {
+        border-bottom: none;
+    }
+
+    td {
+        padding-bottom: 30px;
+        padding-right: 30px;
+        padding-top: 30px;
+    }
+</style>
+@if (Model.Count() > 0)
+{
+
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Id)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserRole)
+            </th>
+            <th>
+                <text>Approval Actions</text>
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                </td>
+                <td>
+                    @if (item.UserRole == 2)
+                    {
+                        <text>Member</text>
+                    }
+                    else if (item.UserRole == 3)
+                    {
+                        <text>Agent</text>
+                    }
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Approve", "Approve", "Admin", new { id = item.User_Id }, new { style = "color:green" }) |
+                    @Html.ActionLink("Reject", "Reject", "Admin", new { id = item.User_Id }, new { style = "color:red" })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h3 style="text-align:center; padding-top:50px;padding-bottom:700px">No new Registrations </h3>
+}
