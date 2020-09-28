@@ -1,0 +1,53 @@
+@model IEnumerable<WebApplication2.Models.Claim>
+
+@{
+    ViewBag.Title = "ProcessedClaims";
+}
+
+<h2 style="padding-top:50px; padding-bottom:50px">Processed Claims</h2>
+
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PolicyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+
+        
+        <th>
+            <text>Details</text>
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    
+    <td>
+        @Html.DisplayFor(modelItem => item.ClaimId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ClaimType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PolicyId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Amount)
+    </td>
+    <td>
+        @Html.ActionLink("User Details", "UserDetails", new { id = item.UserId },null) 
+    </td>
+</tr>
+}
+
+</table>
