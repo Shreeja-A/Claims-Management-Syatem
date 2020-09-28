@@ -1,0 +1,79 @@
+@model WebApplication2.Models.User
+
+@{
+    ViewBag.Title = "UserDetails";
+}
+
+<h2 style="padding-top:50px; padding-bottom:50px">UserDetails</h2>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRole)
+        </dt>
+
+        <dd>
+            @if (Model.UserRole == 2)
+            {
+                <text>Member</text>
+            }
+            else if (Model.UserRole == 3)
+            {
+                <text>Agent</text>
+            }
+        </dd>
+
+
+    </dl>
+</div>
+    @Html.ActionLink("Back to List", "ClaimList","Admin")
+</p>
