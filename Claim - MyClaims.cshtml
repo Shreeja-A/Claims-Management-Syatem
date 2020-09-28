@@ -1,0 +1,75 @@
+@model IEnumerable<WebApplication2.Models.Claim>
+
+@{
+    ViewBag.Title = "MyClaims";
+}
+
+<h2 style="padding-top:50px; padding-bottom:50px">My Claims</h2>
+
+@if (Model.Count() >0)
+{
+
+
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PolicyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.ClaimId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClaimType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PolicyId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @if (item.ClaimStatus == 0)
+            {
+                <text>Waiting for Approval</text>
+            }
+            else if (item.ClaimStatus == 1)
+            {
+                <text>Approved</text>
+            }
+            else if (item.ClaimStatus == 2)
+            {
+                <text>Rejected</text>
+                <br/> @Html.DisplayFor(modelItem => item.Comments)
+            }
+        </td>
+       
+    </tr>
+}
+
+</table>
+}
+else
+{
+    <h3 style="text-align:center; padding-top:50px;padding-bottom:700px">You have not raised any Claims. To Raise new claims go to Claims Request Page </h3>
+}
+
