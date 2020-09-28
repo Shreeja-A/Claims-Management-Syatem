@@ -1,0 +1,105 @@
+@model IEnumerable<WebApplication2.Models.Claim>
+
+@{
+    ViewBag.Title = "ClaimList";
+}
+
+<h2 style="padding-top:50px; padding-bottom:50px">Claims to be Processed</h2>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    tr {
+        border: 1px ridge lightgray;
+        border-left: none;
+        border-right: none;
+    }
+
+    th {
+        padding-top: 30px;
+        padding-right: 100px;
+        padding-bottom: 30px;
+    }
+
+        th:first-child {
+            padding-left: 30px;
+        }
+
+    tr:first-child {
+        border-top: none;
+    }
+
+    td:first-child {
+        padding-left: 30px;
+    }
+
+    tr:last-child {
+        border-bottom: none;
+    }
+
+    td {
+        padding-bottom: 30px;
+        padding-right: 30px;
+        padding-top: 30px;
+    }
+</style>
+
+
+@if (Model.Count() > 0)
+{
+
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PolicyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                <text>Actions</text>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.UserId, "UserDetails", "Admin", new { id = item.UserId }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClaimId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClaimType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PolicyId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.ActionLink("Accept", "ApproveClaim", new { id = item.ClaimId }, new { style = "color:green" }) |
+                    @Html.ActionLink("Deny", "RejectClaim", new { id = item.ClaimId }, new { style = "color:red" })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h3 style="text-align:center; padding-top:50px;padding-bottom:700px">No new Claims</h3>
+}
